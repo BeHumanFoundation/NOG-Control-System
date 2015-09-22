@@ -1,0 +1,23 @@
+<header class="navbar navbar-default navbar-fixed-top">
+ <div class="conteiner"><%= link_to "Home",root_path, class: "navbar-brand" %>
+      <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <% if logged_in? %>
+          <li><%= link_to "Alunos",students_path %></li>
+          <li><%= link_to "Responsáveis", responsibles_path %></li>
+          <li><%= link_to "Voluntários", teachers_path %></li>
+          <li><%= link_to "Relátorios","" %></li>
+          <li><%= link_to "Aulas",lessons_path %></li>
+          <li><%= link_to "Logout",logout_path %></li>
+        <% else %>
+          <li><%= link_to "Login",login_path %></li>
+        <% end %>
+      </ul>
+    </div>
+</header>

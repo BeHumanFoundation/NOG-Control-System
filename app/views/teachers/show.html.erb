@@ -1,0 +1,21 @@
+<% if logged_in? %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-12 well">
+      <p>Nome:<%= @teacher.name %></p>
+      <p>CPF: <%= @teacher.cpf %></p>
+      <p>Nascimento: <%= @teacher.birthday.strftime("%d/%m/%Y") %> </p>
+      <p>Telefone: <%= @teacher.phone %> </p>
+      <p>Endereço: <%= @teacher.address %> </p>
+      <p>CEP: <%= @teacher.cep %> </p>
+      <p>Profissão: <%= @teacher.profession %> </p>
+      <p>Data Criação: <%= @teacher.created_at.strftime("%d/%m/%Y") %> </p>
+      <p><%= link_to "Editar",edit_teacher_path(@teacher), class:"btn btn-default" %>
+         <%= link_to "Voltar",teachers_path, class:"btn btn-default" %>
+      </p>
+    </div>
+  </div>
+</div>
+<% else %>
+  <%= render 'layouts/nonLogged' %>
+<% end %>

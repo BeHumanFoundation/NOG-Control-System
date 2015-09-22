@@ -1,0 +1,24 @@
+<% if logged_in? %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= form_tag do %>
+      <%= @subject_id = select_tag :subject_id, options_from_collection_for_select(@subjects, "id", "name") %>
+      <%= submit_tag 'Criar nova aula', class: 'btn  btn-default' %>
+    <% end %>
+    <table class="table">
+      <% @lessons.each do |lesson| %>
+        <tr>
+          <td><%= lesson.subject.name %></td>
+          <td><%= lesson.created_at.strftime("%d/%m/%Y  - %H:%M") %> </td>
+          <td><%= lesson.teacher.name %> </td>
+          <td><%= link_to "Mostrar mais",lesson_path(lesson), class:"btn btn-default" %></td>
+          <td><%= button_to "Deletar", {:action => :destroy, :controller => 'lessons', :id => lesson.id},:method => :delete,  class:"btn btn-default" %></td>
+        </tr>
+      <% end %>
+    </table>
+    <%= will_paginate @lessons %>
+  </div>
+</div>
+<% else %>
+  <%= render 'layouts/nonLogged' %>
+<% end %>

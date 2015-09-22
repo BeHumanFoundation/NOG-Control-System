@@ -1,0 +1,21 @@
+<% if logged_in? %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= link_to "Novo", new_responsible_path, class: "btn btn-default" %>
+    <% @responsibles.each do |responsible| %>
+      <div class="col-md-12 well">
+      <p><%= responsible.name %></p>
+      <p>CPF: <%= responsible.cpf %></p>
+      <p>Telefone: <%= responsible.phone %> </p>
+      <p>Nascimento: <%= responsible.birthday.strftime("%d/%m/%Y") %> </p>
+      <p><%= link_to "Editar",edit_responsible_path(responsible), class:"btn btn-default" %>
+         <%= link_to "Mostrar mais",responsible_path(responsible), class:"btn btn-default" %>
+      </p>
+    </div>
+    <% end %>
+    <%= will_paginate @responsibles %>
+  </div>
+</div>
+<% else %>
+  <%= render 'layouts/nonLogged' %>
+<% end %>

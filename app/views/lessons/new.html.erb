@@ -1,0 +1,28 @@
+<% if logged_in? %>
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <div class="row">
+      <%= render 'errors', obj: @lesson %>
+    </div>
+    <%= form_tag(new_lesson_path, :method=>'get', :multipart => true) do %>
+      <table>
+        <% if @selectedStudents != nil %>
+          <th> Aluno </th>
+          <th> Falta </th>
+          <% @selectedStudents.each do |student| %>
+            <tr>
+              <td><%= student.name %></td>
+              <td><%= check_box_tag :subjects_id, student.id, false, :name => 'student[faults][]' -%></td>
+            </tr>
+          <% end %>
+          <%= submit_tag('Criar aula', class: "btn btn-success") %>
+        <% else %>
+          <p> Nenhum aluno cadastrado nessa matéria. </p>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+</div>
+<% else %>
+  <%= render 'layouts/nonLogged' %>
+<% end %>

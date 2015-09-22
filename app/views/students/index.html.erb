@@ -1,0 +1,21 @@
+<% if logged_in? %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= link_to "Novo", new_student_path, class: "btn btn-default" %>
+    <% @students.each do |student| %>
+      <div class="col-md-12 well">
+      <p><%= student.name %></p>
+      <p>RG: <%= student.rg %></p>
+      <p>Nascimento: <%= student.birthday.strftime("%d/%m/%Y")%></p>
+      <p>Responsável: <%= student.responsible.name %> </p>
+      <p><%= link_to "Editar",edit_student_path(student), class:"btn btn-default" %>
+         <%= link_to "Mostrar mais",student_path(student), class:"btn btn-default" %>
+      </p>
+    </div>
+    <% end %>
+    <%= will_paginate @students %>
+  </div>
+</div>
+<% else %>
+  <%= render 'layouts/nonLogged' %>
+<% end %>

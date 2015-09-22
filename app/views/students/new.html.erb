@@ -1,0 +1,44 @@
+<% if logged_in? %>
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <div class="row">
+      <%= render 'errors', obj: @student %>
+    </div>
+    <%= form_for(@student,:html => { :class => "form-horizontal" } ) do |f| %>
+      <%= f.label 'Nome' %>
+      <%= f.text_field :name  %>
+
+      <%= f.label 'RG' %>
+      <%= f.text_field :rg  %>
+
+      <%= f.label 'Telefone' %>
+      <%= f.text_field :phone  %>
+
+      <%= f.label 'Endereço' %>
+      <%= f.text_field :address  %>
+
+      <%= f.label 'Nascimento' %>
+      <%= f.date_field :birthday  %>
+
+      <%= f.label 'Escolaridade' %>
+      <%= f.text_field :scholarity  %>
+
+      <%= f.label 'Responsavel' %>
+      <%= f.select(:responsible_id) do %>
+        <% Responsible.all.collect.each do |c| -%>
+        <%= content_tag(:option, c.name, value: c.id) %>
+        <% end %>
+      <% end %>
+
+      <%= f.label 'Matérias' %>
+      <%= f.collection_check_boxes(:subjects, Subject.all, :id, :name) do |b| %>
+            <%= b.label(:"data-value" => b.value) { b.check_box + b.text } %>
+      <% end %>
+
+      <%= f.submit('Criar aluno', class: "btn btn-success") %>
+    <% end %>
+  </div>
+</div>
+<% else %>
+  <%= render 'layouts/nonLogged' %>
+<% end %>

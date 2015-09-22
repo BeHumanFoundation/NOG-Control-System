@@ -1,0 +1,39 @@
+<% if logged_in? %>
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <div class="row">
+      <%= render 'errors', obj: @responsible %>
+    </div>
+    <%= form_for @responsible do |f| %>
+      <%= f.label 'Nome' %>
+      <%= f.text_field :name  %>
+
+      <%= f.label 'CPF' %>
+      <%= f.text_field :cpf  %>
+
+      <%= f.label 'Telefone' %>
+      <%= f.text_field :phone  %>
+
+      <%= f.label 'Telefone Trabalho' %>
+      <%= f.text_field :phone_job  %>
+
+      <%= f.label 'Endereço' %>
+      <%= f.text_field :address  %>
+
+      <%= f.label 'Email' %>
+      <%= f.email_field :email  %>
+
+      <%= f.label 'Profissão' %>
+      <%= f.text_field :profession  %>
+
+      <%= f.label 'Nascimento' %>
+      <%= f.date_field :birthday  %>
+
+
+      <%= f.submit('Editar responsável', class: "btn btn-success") %>
+    <% end %>
+  </div>
+</div>
+<% else %>
+  <%= render 'layouts/nonLogged' %>
+<% end %>

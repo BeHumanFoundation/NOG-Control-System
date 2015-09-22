@@ -1,0 +1,26 @@
+<% if logged_in? %>
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <%= form_for @lesson do |f|%>
+      <table>
+        <th>
+          Estudante
+        </th>
+        <th>
+          Falta
+        </th>
+      <% @selectedStudents.each do |student| %>
+            <tr>
+              <td><%= student.name %> </td>
+              <td><%= check_box_tag 'student[faults][]', student.id -%></td>
+            </tr>
+        </table>
+
+      <% end %>
+      <p><%= f.submit('Criar Aula', class: "btn btn-success") %></p>
+    <% end %>
+  </div>
+</div>
+<% else %>
+  <%= render 'layouts/nonLogged' %>
+<% end %>
