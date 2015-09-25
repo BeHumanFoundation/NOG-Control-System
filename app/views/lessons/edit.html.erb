@@ -9,6 +9,7 @@
         <th>
           Falta
         </th>
+
       <% @selectedStudents.each do |student| %>
             <tr>
               <td><%= student.name %> </td>
@@ -17,6 +18,7 @@
         </table>
 
       <% end %>
+      <div style="display:none"><%= check_box_tag 'student[faults][]', 0, true -%></div>
       <p><%= f.submit('Criar Aula', class: "btn btn-success") %></p>
     <% end %>
   </div>

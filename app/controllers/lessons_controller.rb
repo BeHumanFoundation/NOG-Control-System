@@ -50,22 +50,39 @@ class LessonsController < ApplicationController
   end
 
   def update
+    if(subjects_params == nil)
+      @selectedSubjectId = Rails.cache.read('subject_selected_id')
+    end
+    @subject = Subject.find(@selectedSubjectId)
+    @students = Student.all
+    @selectedStudents ||= []
+    @students.each do |student|
+        if student.subjects.include? @subject
+          @selectedStudents << student
+        end
+    end
     @lesson = Lesson.find(params[:id])
-    binding.pry
-    if get_faults.empty
-      @studentsWithFaults = get_faults
+    @studentsWithoutFaults = Array.new
+    if !get_faults.empty?
+      @studentsWithFaults = Student.find(get_faults)
+      Student.where.not(id: Student.find(get_faults)).each do |present|
+        if @selectedStudents.include? (present)
+          @studentsWithoutFaults.push(present)
+        end
+      end
+      @lesson.students = @studentsWithoutFaults
       @studentsWithFaults.each do |student|
-        @fault = Fault.create(lesson: @lesson, student: Student.find(student))
+        @fault = Fault.create(lesson: @lesson, student: Student.find(student.id))
       end
     else
       @fault = Fault.create(lesson: @lesson)
     end
-    if @fault.errors == nil
-      flash[:success] = "Aula criada com sucesso"
-      redirect_to lesson_path
+    if @fault != nil
+        flash[:success] = "Aula criada com sucesso"
+        redirect_to lessons_path
     else
-      flash[:danger] = "Erro ao criar aula"
-      render :new
+      flash[:success] = "Aula criada com sucesso"
+      redirect_to lessons_path
     end
   end
 
@@ -96,11 +113,10 @@ class LessonsController < ApplicationController
     end
 
     def get_faults
-      if params[:student]['faults']
-        return params[:student]['faults']
-      else
-        return nil
-      end
+      @parameters = params[:student]['faults']
+      @parameters.delete("0")
+      return @parameters
     end
+
 
 end
