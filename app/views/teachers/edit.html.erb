@@ -6,28 +6,28 @@
     </div>
     <%= form_for @teacher do |f| %>
       <%= f.label 'Nome' %>
-      <%= f.text_field :name  %>
+      <p><%= f.text_field :name,class: "form-control"  %></p>
 
       <%= f.label 'CPF' %>
-      <%= f.text_field :cpf  %>
+      <p><%= f.text_field :cpf,class: "form-control"  %></p>
 
       <%= f.label 'Telefone' %>
-      <%= f.text_field :phone  %>
+      <p><%= f.text_field :phone,class: "form-control"  %></p>
 
       <%= f.label 'Endereço' %>
-      <%= f.text_field :address  %>
+      <p><%= f.text_field :address,class: "form-control"  %></p>
 
       <%= f.label 'Email' %>
-      <%= f.email_field :email  %>
+      <p><%= f.email_field :email,class: "form-control"  %></p>
 
       <%= f.label 'Profissão' %>
-      <%= f.text_field :profession  %>
+      <p><%= f.text_field :profession ,class: "form-control" %></p>
 
       <%= f.label 'Nascimento' %>
-      <%= f.date_field :birthday  %>
+      <p><%= f.date_field :birthday,class: "form-control"  %></p>
 
       <%= f.label 'Senha' %>
-      <%= f.password_field :password_digest  %>
+      <p><%= f.password_field :password_digest,class: "form-control"  %></p>
 
       <%= f.submit('Editar voluntário', class: "btn btn-success") %>
     <% end %>

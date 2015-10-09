@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :teachers
   resources :lessons
   resources :subjects
+  resources :reports
 
   get '/login', to: "logins#new"
   post '/login', to: "logins#create"

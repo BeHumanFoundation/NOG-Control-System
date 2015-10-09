@@ -5,7 +5,6 @@ class LessonsController < ApplicationController
   end
 
   def new
-    # binding.pry
     @lesson = Lesson.new
     @subject = Subject.find(subjects_params)
     @students = Student.all
@@ -15,7 +14,6 @@ class LessonsController < ApplicationController
           @selectedStudents << student
         end
     end
-    #binding.pry
   end
 
   def create
@@ -30,7 +28,7 @@ class LessonsController < ApplicationController
       redirect_to edit_lesson_path(@lesson)
     else
       flash[:danger] = "Erro ao criar aula."
-      render :new
+      redirect_to lessons_path
     end
   end
 
@@ -88,6 +86,8 @@ class LessonsController < ApplicationController
 
   def show
     @lesson = Lesson.find(params[:id])
+  #  binding.pry
+    @faults = @lesson.faults
   end
 
   def destroy

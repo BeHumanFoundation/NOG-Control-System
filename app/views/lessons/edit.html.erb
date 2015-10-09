@@ -2,7 +2,7 @@
 <div class="row">
   <div class="well col-md-8 col-md-offset-2">
     <%= form_for @lesson do |f|%>
-      <table>
+      <table class="table">
         <th>
           Estudante
         </th>
@@ -12,12 +12,11 @@
 
       <% @selectedStudents.each do |student| %>
             <tr>
-              <td><%= student.name %> </td>
-              <td><%= check_box_tag 'student[faults][]', student.id -%></td>
+              <td width="90%"><%= student.name %> </td>
+              <td width="10%"><%= check_box_tag 'student[faults][]', student.id -%></td>
             </tr>
-        </table>
-
       <% end %>
+            </table>
       <div style="display:none"><%= check_box_tag 'student[faults][]', 0, true -%></div>
       <p><%= f.submit('Criar Aula', class: "btn btn-success") %></p>
     <% end %>

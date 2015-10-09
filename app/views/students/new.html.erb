@@ -6,35 +6,37 @@
     </div>
     <%= form_for(@student,:html => { :class => "form-horizontal" } ) do |f| %>
       <%= f.label 'Nome' %>
-      <%= f.text_field :name  %>
+      <p><%= f.text_field :name,class: "form-control"  %></p>
 
       <%= f.label 'RG' %>
-      <%= f.text_field :rg  %>
+      <p><%= f.text_field :rg,class: "form-control"  %></p>
 
       <%= f.label 'Telefone' %>
-      <%= f.text_field :phone  %>
+      <p><%= f.text_field :phone,class: "form-control"  %></p>
 
       <%= f.label 'Endereço' %>
-      <%= f.text_field :address  %>
+      <p><%= f.text_field :address,class: "form-control"  %></p>
 
       <%= f.label 'Nascimento' %>
-      <%= f.date_field :birthday  %>
+      <p><%= f.date_field :birthday,class: "form-control"  %></p>
 
       <%= f.label 'Escolaridade' %>
-      <%= f.text_field :scholarity  %>
+      <p><%= f.text_field :scholarity,class: "form-control"  %></p>
 
       <%= f.label 'Responsavel' %>
-      <%= f.select(:responsible_id) do %>
+      <p><%= f.select(:responsible_id) do %>
         <% Responsible.all.collect.each do |c| -%>
         <%= content_tag(:option, c.name, value: c.id) %>
         <% end %>
       <% end %>
+      </p>
 
       <%= f.label 'Matérias' %>
-      <%= f.collection_check_boxes(:subjects, Subject.all, :id, :name) do |b| %>
+      <p><%= f.collection_check_boxes(:subjects, Subject.all, :id, :name) do |b| %>
             <%= b.label(:"data-value" => b.value) { b.check_box + b.text } %>
       <% end %>
-
+      </p>
+      
       <%= f.submit('Criar aluno', class: "btn btn-success") %>
     <% end %>
   </div>
